@@ -2,45 +2,40 @@
 #include <stdarg.h>
 #include <stdio.h>
 #include <stddef.h>
+#include <limits.h>
+
 /**
- * _printf - a function that mimicks printf
- *
- * @format: string to be printed
- *
- * Return: 0
- *
+ * _printf - prints formatted data to stdout
+ * @format: string that contains the format to print
+ * Return: number of characters written
  */
-int _printf(const char *format, ...)
+
+int _printf(const char * const format, ...)
 {
-	va_list print;
+	va_list args;
+	int i = 0, output = 0;
+	int (*func)(va_list);
 
-	int fun, i = 0;
+	va_start(args, format);
 
-	va_start(print, format);
 	while (format[i] != '\0')
 	{
 		if (format[i] == '%')
 		{
-			i++;
-		}
-		if (format[i] == '%')
-		{
-			_putchar("%");
-		}
-		else if (format[i] == 'c')
-		{
-			_putchar(va_arg(print, int));
-		}
-		else if (format[i] == 's')
-		{
-			while (fun[i] != NULL)
+			func = _select_func(format[i + 1]);
+			if (func != NULL)
 			{
-				_putchar('fun[i]');
-				i++;
+			output += func(args);
+			i++;
 			}
+		}
+		else
+		{
+			_putchar(format[i]);
+			output++;
 		}
 		i++;
 	}
-	va_end(print);
-	return (i);
+	va_end(args);
+	return (output);
 }
