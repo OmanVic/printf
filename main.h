@@ -1,20 +1,26 @@
 #ifndef MAIN_H
 #define MAIN_H
-int _print_int(va_list args);
-int _print_char(va_list args);
-int _print_str(va_list args);
-int _print_bin(va_list args);
-int _print_dec(va_list args);
+
+#include <stdarg.h>
+
+int _putchar(char c);
+void _puts(char *str);
+void print_number(va_list ap, int base, int sign, int caps);
+int _strlen(char *s);
 int _printf(const char *format, ...);
-int _print_perc(va_list args);
-int (*_select_func(const char c))(va_list);
-int _print_octal(va_list args);
-int _print_unint(va_list args);
-int _print_x(va_list args);
-int _print_X(va_list args);
-int _print_hex(unsigned int n, unsigned int c);
-int _print_Rev(va_list args);
-int _print_rot(va_list args);
-int _print_S(va_list args);
+char *convert(char hexa_dec[], unsigned int num, int base);
+int function_manager(char c, va_list arg);
+int _switch(char c, va_list arg);
+int print_character(va_list arg);
+int print_sign(va_list arg, int base);
+int print_unsign(va_list arg, int base);
+int print_string(va_list arg);
+int print_ptr(va_list arg);
+int print_rot13(va_list arg);
+int print_rev(va_list arg);
+int print_base16_upper_lower(va_list arg, char *representation);
+int loop_format(va_list arg, const char *string);
+int call_function_manager(char aux, va_list arg);
+int check_percent(int *flag, char aux);
 
 #endif
